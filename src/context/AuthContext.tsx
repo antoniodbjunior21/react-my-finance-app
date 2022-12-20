@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 
 // ** Config
-import authConfig from 'src/configs/api/api-service'
+import authConfig from 'src/configs/api-routes'
 
 // ** Types
 import { AuthValuesType, RegisterParams, LoginParams, ErrCallbackType, UserDataType } from './types'
@@ -74,9 +74,13 @@ const AuthProvider = ({ children }: Props) => {
 
   const handleLogin = (params: LoginParams, errorCallback?: ErrCallbackType) => {
     axios
-      .post(authConfig.loginEndpoint, params)
+      .post(authConfig.loginEndpoint,
+        new URLSearchParams({
+          email: params.email,
+          password: params.password
+        })
+        )
       .then(async response => {
-        console.log(response)
 
         params.rememberMe
           ? window.localStorage.setItem(authConfig.storageTokenKeyName, response.data.accessToken)
