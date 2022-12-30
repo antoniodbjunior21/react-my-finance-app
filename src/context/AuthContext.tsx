@@ -77,7 +77,7 @@ const AuthProvider = ({ children }: Props) => {
       .post(authConfig.loginEndpoint,
         new URLSearchParams({
           email: params.email,
-          password: params.password
+          senha: params.senha
         })
         )
       .then(async response => {
@@ -114,7 +114,7 @@ const AuthProvider = ({ children }: Props) => {
         if (res.data.error) {
           if (errorCallback) errorCallback(res.data.error)
         } else {
-          handleLogin({ email: params.email, password: params.password })
+          handleLogin({ email: params.email, senha: params.senha })
         }
       })
       .catch((err: { [key: string]: string }) => (errorCallback ? errorCallback(err) : null))

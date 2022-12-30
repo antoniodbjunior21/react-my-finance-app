@@ -137,7 +137,7 @@ const Register = () => {
 
   const onSubmit = (data: FormData) => {
     const { email, username, password } = data
-    register({ email, username, password }, err => {
+    register({ email, nome: username, senha: password }, err => {
       if (err.email) {
         setError('email', {
           type: 'manual',
